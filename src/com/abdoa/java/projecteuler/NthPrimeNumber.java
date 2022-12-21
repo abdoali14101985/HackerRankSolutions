@@ -10,30 +10,25 @@ public class NthPrimeNumber {
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
 
         int t = Integer.parseInt(bufferedReader.readLine().trim());
+        //int index = 0;
+        int[] primeNumberArray = new int[10000];
+        int index = 0;
+        for(int i=1; i<Integer.MAX_VALUE && index<10000; i++){
+            if(isPrime(i)){
+                primeNumberArray[index++] = i;
+            }
+        }
 
         IntStream.range(0, t).forEach(tItr -> {
             try {
                 int n = Integer.parseInt(bufferedReader.readLine().trim());
-                getNthPrimeNumber(n);
+                System.out.println(primeNumberArray[n-1]);
             } catch (IOException ex) {
                 throw new RuntimeException(ex);
             }
         });
 
         bufferedReader.close();
-    }
-
-    private static void getNthPrimeNumber(int n) {
-        int counter = 0;
-        for (int i = 2; i > 1; i++) {
-            if (isPrime(i)) {
-                counter++;
-            }
-            if (counter == n) {
-                System.out.println(i);
-                break;
-            }
-        }
     }
 
     private static boolean isPrime(int n) {
